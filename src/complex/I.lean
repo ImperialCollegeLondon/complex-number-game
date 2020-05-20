@@ -9,7 +9,7 @@ The complex numbers, modelled as R^2 in the obvious way.
 import complex.basic -- tutorial level
 /-! 
 
-# Exercise 1: I 
+# Level 1: I 
 
 I find it unbelievable that we have written quite a lot of code about the complex numbers
 and we've still never defined i, or j, or I, or $$\sqrt{-1}$$, or whatever it's called. 
@@ -33,10 +33,6 @@ def I : ℂ := sorry
 @[simp] lemma I_im : I.im = 1 := sorry
 
 @[simp] lemma I_mul_I : I * I = -1 := sorry
-
-
-
-
 
 #exit
 -- to be moved: need coercions
