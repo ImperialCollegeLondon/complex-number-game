@@ -52,16 +52,3 @@ def Conj : ℂ →+* ℂ :=
 }
 
 end complex
-
-#exit
--- needs coercions
-@[simp] lemma conj_of_real (r : ℝ) : conj r = r := sorry
-
-lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
-sorry
-
-lemma eq_conj_iff_re {z : ℂ} : conj z = z ↔ (z.re : ℂ) = z :=
-sorry
-
-theorem add_conj (z : ℂ) : z + conj z = (2 * z.re : ℝ) :=
-sorry
