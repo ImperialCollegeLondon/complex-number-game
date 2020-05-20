@@ -4,8 +4,8 @@ import complex.conj -- solutions to exercise 2
 
 # Exercise 3: Norms
 
-Define `norm_sq(z)` to be `re(z)*re(z)+im(z)*im(z)` and see
-what you can prove.
+Define `norm_sq : ℂ → ℝ` by defining `norm_sq(z)` to be `re(z)*re(z)+im(z)*im(z)` and see
+what you can prove about it.
 
 -/
 
