@@ -20,7 +20,7 @@ def norm_sq (z : ℂ) : ℝ := sorry
 @[simp] lemma norm_sq_one : norm_sq 1 = 1 := sorry
 @[simp] lemma norm_sq_I : norm_sq I = 1 := sorry
 
-/-! # Behaviour with respect to *, + and - -/
+/-! ## Behaviour with respect to *, + and - -/
 
 @[simp] lemma norm_sq_mul (z w : ℂ) : norm_sq (z * w) = norm_sq z * norm_sq w :=
 sorry
@@ -32,7 +32,7 @@ sorry
 @[simp] lemma norm_sq_neg (z : ℂ) : norm_sq (-z) = norm_sq z :=
 sorry
 
-/-! # Behaviour with respect to `conj` -/
+/-! ## Behaviour with respect to `conj` -/
 
 @[simp] lemma norm_sq_conj (z : ℂ) : norm_sq (conj z) = norm_sq z :=
 sorry
