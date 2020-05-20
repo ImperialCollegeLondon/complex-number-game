@@ -6,7 +6,7 @@ Thanks: Imperial College London, leanprover-community
 
 The complex numbers, modelled as R^2 in the obvious way.
 -/
-import data.complex.basic -- tutorial level
+import complex.basic -- tutorial level
 /-! 
 
 # Exercise 1: I 
@@ -34,9 +34,16 @@ def I : ℂ := sorry
 
 @[simp] lemma I_mul_I : I * I = -1 := sorry
 
+
+
+
+
+#exit
+-- to be moved: need coercions
+
 lemma mk_eq_add_mul_I (a b : ℝ) : complex.mk a b = a + b * I := sorry
 
 @[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z := sorry
 
--- boss level (I haven't given you enough information to solve this)
+-- I haven't given enough information to solve this
 lemma I_ne_zero : (I : ℂ) ≠ 0 := sorry
