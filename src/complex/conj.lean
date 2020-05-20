@@ -9,25 +9,37 @@ import complex.I
 
 namespace complex
 
+-- First complete the definition using `complex.mk` or `⟨x, y⟩` notation
+
+/-- The complex conjugate of a complex number -/
 def conj (z : ℂ) : ℂ := sorry
+
+-- Now prove how it interacts with everything else
+
+/-! ## Real and imaginary parts -/
 
 @[simp] lemma conj_re (z : ℂ) : re(conj z) = re(z) := sorry
 @[simp] lemma conj_im (z : ℂ) : im(conj z) = -im(z) := sorry
 
+/-! ## Behaviour with respect to 0, 1 and I -/
 
 @[simp] lemma conj_zero : conj 0 = 0 := sorry
 @[simp] lemma conj_one : conj 1 = 1 := sorry
 @[simp] lemma conj_I : conj I = -I := sorry
+@[simp] lemma conj_neg_I : conj (-I) = I := sorry
+
+/-! # Behaviour with respect to +, - and * -/
 
 @[simp] lemma conj_add (z w : ℂ) : conj (z + w) = conj z + conj w :=
 sorry
 
 @[simp] lemma conj_neg (z : ℂ) : conj (-z) = -conj z := sorry
 
-@[simp] lemma conj_neg_I : conj (-I) = I := sorry
 
 @[simp] lemma conj_mul (z w : ℂ) : conj (z * w) = conj z * conj w :=
 sorry
+
+/-! # Properties of the `conj` map -/
 
 @[simp] lemma conj_conj (z : ℂ) : conj (conj z) = z :=
 sorry
