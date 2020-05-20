@@ -8,7 +8,8 @@ In the tutorial level we define `0`, `1`, `+`, `-` and `*`, and prove that the c
 
 # The normal levels
 
-People who know some basic Lean tactics should be able to have a go at these.
+People who know some basic Lean tactics should be able to have a go at these. Open the relevant project files in VS Code and
+fill in all the `sorry`s.
 
 * Level 1: sqrt(-1), is at `src/complex/I.lean`
 
