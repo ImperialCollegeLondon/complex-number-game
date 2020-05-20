@@ -27,28 +27,7 @@ structure complex : Type :=
 -- Let's use the usual notation for the complex numbers
 notation `ℂ` := complex
 
--- You make the complex number with real part 3 and imaginary part 4 like this:
-example : ℂ :=
-{ re := 3,
-  im := 4 }
 
--- Or like this:
-example : ℂ := complex.mk 3 4
-
--- or like this:
-example : ℂ := ⟨3, 4⟩
-
--- They all give the same complex number.
-
--- If you have a complex number, then you can get its real and 
--- imaginary parts with the `complex.re` and `complex.im` functions.
-
-example : ℝ := complex.re(complex.mk 3 4) -- this term is (3 : ℝ)
-
-example : complex.re(complex.mk 3 4) = 3 := rfl -- true by definition.
-
--- We clearly don't want to be constantly saying `complex.blah` so let's
--- move into the `complex` namespace
 
 namespace complex
 
@@ -420,7 +399,7 @@ by simpa using @conj_inj z 0
 
 lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
 ⟨λ h, ⟨z.re, ext rfl $ eq_zero_of_neg_eq (congr_arg im h)⟩,
- λ ⟨h, e⟩, _⟩
+ λ ⟨h, e⟩, by simp * at *⟩
 
 lemma eq_conj_iff_re {z : ℂ} : conj z = z ↔ (z.re : ℂ) = z :=
 eq_conj_iff_real.trans ⟨by rintro ⟨r, rfl⟩; simp, λ h, ⟨_, h.symm⟩⟩
