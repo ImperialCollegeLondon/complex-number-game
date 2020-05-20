@@ -396,7 +396,7 @@ lemma mk_eq_add_mul_I (a b : ℝ) : complex.mk a b = a + b * I := sorry
 
 @[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z := sorry
 
--- boss level
+-- boss level (I haven't given you enough information to solve this)
 lemma I_ne_zero : (I : ℂ) ≠ 0 := sorry
 
 /-! 

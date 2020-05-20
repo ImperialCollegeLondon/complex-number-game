@@ -341,13 +341,6 @@ end
 
 @[simp, norm_cast] lemma of_real_mul (r s : ℝ) : ((r * s : ℝ) : ℂ) = r * s := ext_iff.2 $ by simp
 
-/-! ## Example `simp` usage -/
-
--- examples of the power of `simp` now. Change to -- `by squeeze_simp` to see which
--- lemmas `simp` uses
-lemma smul_re (r : ℝ) (z : ℂ) : (↑r * z).re = r * z.re := by simp -- or by squeeze_simp
-lemma smul_im (r : ℝ) (z : ℂ) : (↑r * z).im = r * z.im := by simp -- or by squeeze_simp
-
 /-! ## Numerals
 
 Feel free to skip 15 lines down to `I` if you are a mathematician.
@@ -378,13 +371,14 @@ def I : ℂ := ⟨0, 1⟩
 
 @[simp] lemma I_mul_I : I * I = -1 := ext_iff.2 $ by simp
 
-lemma I_ne_zero : (I : ℂ) ≠ 0 := mt (congr_arg im) zero_ne_one.symm
-
 lemma mk_eq_add_mul_I (a b : ℝ) : complex.mk a b = a + b * I :=
 ext_iff.2 $ by simp
 
 @[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z :=
 ext_iff.2 $ by simp
+
+-- harder
+lemma I_ne_zero : (I : ℂ) ≠ 0 := mt (congr_arg im) zero_ne_one.symm
 
 /-! # Complex conjugation -/
 
