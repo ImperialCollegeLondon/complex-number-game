@@ -20,6 +20,8 @@ by replacing `sorry` with `begin end` and then starting to write
 tactics in the `begin end` block.
 -/
 
+namespace complex
+
 /-- complex.I is the square root of -1 above the imaginary axis -/
 def I : ℂ := sorry
 
@@ -28,18 +30,32 @@ def I : ℂ := sorry
  Easy lemmas, tagged with `simp` so Lean can prove things about `I` by equating
  real and imaginary parts.
  
-  -/
-@[simp] lemma I_re : I.re = 0 := sorry
-@[simp] lemma I_im : I.im = 1 := sorry
+-/
 
-@[simp] lemma I_mul_I : I * I = -1 := sorry
+/-- re(I) = 0 -/
+@[simp] lemma I_re : re(I) = 0 :=
+begin
+  sorry
+end
 
-#exit
--- to be moved: need coercions
+/-- im(I) = 1 -/
+@[simp] lemma I_im : im(I) = 1 :=
+begin
+  sorry
+end
 
-lemma mk_eq_add_mul_I (a b : ℝ) : complex.mk a b = a + b * I := sorry
+/-- I*I = -1 -/
+@[simp] lemma I_mul_I : I * I = -1 :=
+begin
+  sorry
+end
 
-@[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z := sorry
+-- Boss level. Hint: don't forget ext_iff
 
--- I haven't given enough information to solve this
-lemma I_ne_zero : (I : ℂ) ≠ 0 := sorry
+/-- I is non-zero -/
+lemma I_ne_zero : (I : ℂ) ≠ 0 :=
+begin
+  sorry
+end
+
+end complex
