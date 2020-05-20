@@ -4,14 +4,26 @@ The Complex Number Game. Make the complex numbers in Lean.
 
 # Installation
 
-First [install Lean and the python package `mathlibtools`](https://leanprover-community.github.io/get_started.html).
+This assumes you have [installed Lean and the python package `mathlibtools`](https://leanprover-community.github.io/get_started.html).
 
-Then
+All you have to do is type
 
 ```
 leanproject get ImperialCollegeLondon/complex-number-game
+```
+
+into the terminal you used to install `mathlibtools`. This will get the fully compiled Lean project onto your computer.
+
+You can open the project using the terminal with
+
+```
 cd complex-number-game
 code .
 ```
 
-(or "Open Folder" -> `complex-number-game` in VS Code)
+(or you can use VS Code and then "Open Folder" -> `complex-number-game`)
+
+# Playing the game
+
+See the [instructions](INSTRUCTIONS.md).
+
