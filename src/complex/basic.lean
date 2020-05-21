@@ -17,13 +17,18 @@ We also "extract some basic API" (e.g. we prove that
 two complex numbers are equal iff they have the same
 real and imaginary parts)
 
-This file has no `sorry`s in. All of the other levels
+This file has no `sorry`s in. All of the other levels:
 
-*TODO : list levels
+`I.lean`
+`conj.lean`
+`norm_sq.lean`
+`of_real.lean`
+`field.lean`
+`alg_closed.lean`
 
 have sorrys, indicating puzzles to be solved.
 
-# Main definitions
+# Main Definitions
 
 `zero` : the complex number 0
 `one` : the complex number 1
@@ -31,7 +36,7 @@ have sorrys, indicating puzzles to be solved.
 `neg` -- negation of a complex number
 `mul` -- multiplication of two complex numbers
 
-# Main theorem
+# Main Theorem
 
 `comm_ring` : The complex numbers are a commutative ring.
 
