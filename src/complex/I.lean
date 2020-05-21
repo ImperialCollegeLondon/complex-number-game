@@ -50,8 +50,12 @@ begin
   sorry
 end
 
--- Boss level. Hint: don't forget ext_iff
-
+/-
+  Bonus level. Hint: don't forget ext_iff. It's defined
+  in complex.basic and its type is below.
+   
+  ext_iff : ∀ {z w : ℂ}, z = w ↔ z.re = w.re ∧ z.im = w.im
+-/
 /-- I is non-zero -/
 lemma I_ne_zero : (I : ℂ) ≠ 0 :=
 begin
