@@ -17,13 +17,18 @@ We also "extract some basic API" (e.g. we prove that
 two complex numbers are equal iff they have the same
 real and imaginary parts)
 
-This file has no `sorry`s in. All of the other levels
+This file has no `sorry`s in. All of the other levels:
 
-*TODO : list levels
+`I.lean`
+`conj.lean`
+`norm_sq.lean`
+`of_real.lean`
+`field.lean`
+`alg_closed.lean`
 
 have sorrys, indicating puzzles to be solved.
 
-# Main definitions
+# Main Definitions
 
 `zero` : the complex number 0
 `one` : the complex number 1
@@ -31,7 +36,7 @@ have sorrys, indicating puzzles to be solved.
 `neg` -- negation of a complex number
 `mul` -- multiplication of two complex numbers
 
-# Main theorem
+# Main Theorem
 
 `comm_ring` : The complex numbers are a commutative ring.
 
@@ -130,8 +135,8 @@ def add (z w : ℂ) : ℂ := ⟨z.re + w.re, z.im + w.im⟩
 instance : has_add ℂ := ⟨add⟩
 
 -- basic properties
-@[simp] lemma add_re (z w : ℂ) : re(z + w) = re(z) + re(w) := rfl
-@[simp] lemma add_im (z w : ℂ) : im(z + w) = im(z) + im(w) := rfl
+@[simp] lemma add_re (z w : ℂ) : re(z + w) = re(z) + re(w) := begin refl end
+@[simp] lemma add_im (z w : ℂ) : im(z + w) = im(z) + im(w) := begin refl end
 
 /-! ## neg (-) -/
 
@@ -144,8 +149,8 @@ def neg (z : ℂ) : ℂ := ⟨-re(z), -im(z)⟩
 instance : has_neg ℂ := ⟨neg⟩
 
 -- how neg interacts with re and im
-@[simp] lemma neg_re (z : ℂ) : re(-z) = -re(z) := rfl
-@[simp] lemma neg_im (z : ℂ) : im(-z) = -im(z) := rfl
+@[simp] lemma neg_re (z : ℂ) : re(-z) = -re(z) := begin refl end
+@[simp] lemma neg_im (z : ℂ) : im(-z) = -im(z) := begin refl end
 
 /-! ## mul (*) -/
 
@@ -158,8 +163,8 @@ def mul (z w : ℂ) : ℂ := ⟨re(z) * re(w) - im(z) * im(w), re(z) * im(w) + i
 instance : has_mul ℂ := ⟨mul⟩
 
 -- how `mul` reacts with `re` and `im`
-@[simp] lemma mul_re (z w : ℂ) : (z * w).re = z.re * w.re - z.im * w.im := rfl
-@[simp] lemma mul_im (z w : ℂ) : (z * w).im = z.re * w.im + z.im * w.re := rfl
+@[simp] lemma mul_re (z w : ℂ) : (z * w).re = z.re * w.re - z.im * w.im := begin refl end
+@[simp] lemma mul_im (z w : ℂ) : (z * w).im = z.re * w.im + z.im * w.re := begin refl end
 
 /-! ## Example of what `simp` can now do -/
 
