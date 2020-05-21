@@ -50,10 +50,6 @@ sorry
 @[simp] lemma conj_eq_zero {z : ℂ} : conj z = 0 ↔ z = 0 :=
 sorry
 
-lemma conj_involutive : function.involutive conj := sorry
-
-lemma conj_bijective : function.bijective conj := sorry
-
 /-- the ring homomorphism complex conjugation -/
 def Conj : ℂ →+* ℂ :=
 { to_fun := conj,
@@ -62,5 +58,12 @@ def Conj : ℂ →+* ℂ :=
   map_add' := begin sorry end,
   map_mul' := begin sorry end
 }
+
+-- Some optional lemmas which computer scientists like.
+-- If you can work out what they say, you can probably prove them
+
+lemma conj_involutive : function.involutive conj := sorry
+
+lemma conj_bijective : function.bijective conj := sorry
 
 end complex
