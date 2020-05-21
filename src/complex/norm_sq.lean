@@ -39,6 +39,11 @@ sorry
 
 /-! ## Behaviour with respect to real 0, ≤, < and so on -/
 
+-- Warning: you will have to know something about Lean's API for
+-- real numbers to solve these ones. If you turn the statements about
+-- complex numbers into statements about real numbers, you'll find
+-- they're of the form "prove $$x^2+y^2\geq0$$" with `x` and `y` real.
+
 lemma norm_sq_nonneg (z : ℂ) : 0 ≤ norm_sq z := sorry
 
 @[simp] lemma norm_sq_eq_zero {z : ℂ} : norm_sq z = 0 ↔ z = 0 :=
