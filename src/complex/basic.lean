@@ -163,8 +163,8 @@ def mul (z w : ℂ) : ℂ := ⟨re(z) * re(w) - im(z) * im(w), re(z) * im(w) + i
 instance : has_mul ℂ := ⟨mul⟩
 
 -- how `mul` reacts with `re` and `im`
-@[simp] lemma mul_re (z w : ℂ) : (z * w).re = z.re * w.re - z.im * w.im := begin refl end
-@[simp] lemma mul_im (z w : ℂ) : (z * w).im = z.re * w.im + z.im * w.re := begin refl end
+@[simp] lemma mul_re (z w : ℂ) : re(z * w) = re(z) * re(w) - im(z) * im(w) := begin refl end
+@[simp] lemma mul_im (z w : ℂ) : im(z * w) = re(z) * im(w) + im(z) * re(w) := begin refl end
 
 /-! ## Example of what `simp` can now do -/
 
