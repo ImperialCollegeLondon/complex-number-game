@@ -9,7 +9,8 @@ Mathematically it is relatively straightforward.
 
 namespace complex
 
--- fill in the definition of the map below
+-- fill in the definition of the map below,
+-- sending the real number r to the complex number ⟨r, 0⟩
 
 /-- The canonical map from ℝ to ℂ. -/
 def of_real (r : ℝ) : ℂ := sorry
