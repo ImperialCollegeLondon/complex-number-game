@@ -1,6 +1,6 @@
 # The Complex Number Game
 
-The Complex Number Game. Make the complex numbers in Lean.
+The Complex Number Game. Make an interface for the complex numbers in Lean.
 
 # Installation
 
@@ -25,7 +25,8 @@ code .
 
 # Playing the game
 
-See the [instructions](INSTRUCTIONS.md).
+The general idea: we can assume anything about the real numbers, and have to build the complex numbers from the ground up.
+Once the project is installed on your computer, see the [instructions](INSTRUCTIONS.md) for how to play it.
 
 # Thanks
 
