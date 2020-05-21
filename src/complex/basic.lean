@@ -190,15 +190,7 @@ so we can tag it with the `ext` attribute, meaning that the
 begin
   cases z with zr zi,
   cases w with ww wi,
-  simp at *,
-  /- goal now a logic puzzle
-  
-  hre : zr = ww,
-  him : zi = wi
-  ⊢ zr = ww ∧ zi = wi
-  
-  -/
-  cc,
+  simp * at *,
 end
 
 /-! # Theorem:  The complex numbers are a commutative ring -/
@@ -211,11 +203,11 @@ begin
   -- first the data
   refine_struct {
       zero := (0 : ℂ), add := (+), neg := has_neg.neg, one := 1, mul := (*),
-  ..},
+  ..};
   -- now the axioms
   -- of which there seem to be 11
   -- introduce the variables
-  all_goals {intros},
+  intros;
   -- we now have to prove an equality between two complex numbers.
   -- It suffices to check on real and imaginary parts
   all_goals {ext},
