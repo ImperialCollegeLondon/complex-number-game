@@ -73,6 +73,9 @@ def Conj : ℂ →+* ℂ :=
   map_mul' := conj_mul,
 }
 
+#exit -- to get rid of future import warnings
+-- I still need to do two questions here
+
 open function
 
 lemma conj_involutive : involutive conj :=
