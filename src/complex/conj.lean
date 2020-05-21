@@ -59,11 +59,14 @@ def Conj : ℂ →+* ℂ :=
   map_mul' := begin sorry end
 }
 
--- Some optional lemmas which computer scientists like.
--- If you can work out what they say, you can probably prove them
+-- Two optional lemmas which computer scientists like,
+-- giving us easy access to some basic properties
+-- of conj
 
-lemma conj_involutive : function.involutive conj := sorry
+open function
 
-lemma conj_bijective : function.bijective conj := sorry
+lemma conj_involutive : involutive conj := sorry
+
+lemma conj_bijective : bijective conj := sorry
 
 end complex
