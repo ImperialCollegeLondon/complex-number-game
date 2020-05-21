@@ -1,6 +1,6 @@
 import complex.norm_sq
 
-/-! # Coercion 
+/-! # Level 4 : Coercion 
 
 This file sets up the coercion from the reals to the complexes, sending `r` to `⟨r, 0⟩`.
 Mathematically it is relatively straightforward.
