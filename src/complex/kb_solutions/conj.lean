@@ -1,5 +1,5 @@
 -- import solutions to level 1
-import complex.I
+import complex.kb_solutions.I
 
 /-! 
 
@@ -12,45 +12,64 @@ namespace complex
 -- First complete the definition using `complex.mk` or `⟨x, y⟩` notation
 
 /-- The complex conjugate of a complex number -/
-def conj (z : ℂ) : ℂ := sorry
+def conj (z : ℂ) : ℂ := ⟨re(z), -im(z)⟩
 
 -- Now prove how it interacts with everything else
 
 /-! ## Real and imaginary parts -/
 
-@[simp] lemma conj_re (z : ℂ) : re(conj z) = re(z) := sorry
-@[simp] lemma conj_im (z : ℂ) : im(conj z) = -im(z) := sorry
+@[simp] lemma conj_re (z : ℂ) : re(conj z) = re(z) := rfl -- short for "begin refl end"
+@[simp] lemma conj_im (z : ℂ) : im(conj z) = -im(z) := rfl
 
 /-! ## Behaviour with respect to 0, 1 and I -/
 
-@[simp] lemma conj_zero : conj 0 = 0 := sorry
-@[simp] lemma conj_one : conj 1 = 1 := sorry
-@[simp] lemma conj_I : conj I = -I := sorry
-@[simp] lemma conj_neg_I : conj (-I) = I := sorry
+@[simp] lemma conj_zero : conj 0 = 0 := by ext; simp -- short for "begin ext; simp end"
+@[simp] lemma conj_one : conj 1 = 1 := by ext; simp
+@[simp] lemma conj_I : conj I = -I := by ext; simp
+@[simp] lemma conj_neg_I : conj (-I) = I := by ext; simp
 
 /-! # Behaviour with respect to +, - and * -/
 
 @[simp] lemma conj_add (z w : ℂ) : conj (z + w) = conj z + conj w :=
-sorry
+by ext; -- check on real and imag parts 
+   simp; -- question becomes to check that a+b=b+a for certain real numbers a and b
+   ring -- true because this is obvious in a ring
 
-@[simp] lemma conj_neg (z : ℂ) : conj (-z) = -conj z := sorry
+@[simp] lemma conj_neg (z : ℂ) : conj (-z) = -conj z :=
+by ext; -- check on real and imag parts 
+   refl -- happens to be true by definition
 
 
 @[simp] lemma conj_mul (z w : ℂ) : conj (z * w) = conj z * conj w :=
-sorry
+by ext; -- check on real and imag parts 
+   simp; -- it's some random statement involving ring theory of the real numbers
+   ring -- solve it
 
 /-! # Properties of the `conj` map -/
 
 @[simp] lemma conj_conj (z : ℂ) : conj (conj z) = z :=
-sorry
+by ext; -- check on real and imag parts 
+   simp -- ext had reduced question to -(-x)=x for reals
+
+attribute [simp] ext_iff -- cheeky trick to make the next proof work
 
 lemma conj_inj {z w : ℂ} : conj z = conj w ↔ z = w :=
-sorry
+begin
+  simp * at *
+end
+
 
 @[simp] lemma conj_eq_zero {z : ℂ} : conj z = 0 ↔ z = 0 :=
-sorry
+begin
+  simp * at *
+end
 
-lemma conj_involutive : function.involutive conj := sorry
+-- 
+lemma conj_involutive : function.involutive conj :=
+begin
+  
+end
+
 
 lemma conj_bijective : function.bijective conj := sorry
 
