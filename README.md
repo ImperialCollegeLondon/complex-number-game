@@ -27,3 +27,16 @@ code .
 
 See the [instructions](INSTRUCTIONS.md).
 
+# Thanks
+
+* Everyone on the Zulip chat at leanprover-community, for answering my
+questions. You are now too many to mention.
+
+* Patrick Massot, and all the other people who have been involved in getting
+  the `leanproject` command up and running. If you're using linux, Lean
+  projects are now really easy to install.
+
+* Scott Morrison, for explaining that I had missed an opportunity to teach `simp`
+  in the natural number game. My excuse: I didn't understand it at the time!
+  I hope you like this one better.
+
