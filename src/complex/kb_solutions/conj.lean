@@ -64,22 +64,29 @@ begin
   simp * at *
 end
 
--- 
-lemma conj_involutive : function.involutive conj :=
-begin
-  
-end
-
-
-lemma conj_bijective : function.bijective conj := sorry
-
 /-- the ring homomorphism complex conjugation -/
 def Conj : ℂ →+* ℂ :=
 { to_fun := conj,
-  map_zero' := begin sorry end,
-  map_one' := begin sorry end,
-  map_add' := begin sorry end,
-  map_mul' := begin sorry end
+  map_zero' := conj_zero,
+  map_one' := conj_one,
+  map_add' := conj_add,
+  map_mul' := conj_mul,
 }
+
+open function
+
+lemma conj_involutive : involutive conj :=
+begin
+  unfold involutive,
+  simp,
+end
+
+lemma conj_bijective : bijective conj :=
+begin
+  unfold bijective,
+  sorry -- TODO
+end
+
+
 
 end complex
