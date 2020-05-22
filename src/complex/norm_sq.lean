@@ -1,8 +1,15 @@
+/-
+Copyright (c) 2020 The Xena project. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Kevin Buzzard.
+Thanks: Imperial College London, leanprover-community
+-/
 
-import complex.conj -- solutions to exercise 2
+import complex.conj -- solutions to levels 1 and 2
+
 /-! 
 
-# Exercise 3: Norms
+# Level 3: Norms
 
 Define `norm_sq : ℂ → ℝ` by defining `norm_sq(z)` to be `re(z)*re(z)+im(z)*im(z)` and see
 what you can prove about it.
