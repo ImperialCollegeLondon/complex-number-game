@@ -3,8 +3,6 @@ Copyright (c) 2020 The Xena project. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
-
-The complex numbers, modelled as R^2 in the obvious way.
 -/
 import complex.basic -- tutorial level
 /-! 
