@@ -40,8 +40,10 @@ instance : field ℂ :=
     -- why is everything in such a weird state?
     change z ≠ 0 at hz,
     change z * z⁻¹ = 1,
+    -- that's better
     rw ←norm_sq_pos at hz,
-    have h : z.norm_sq ≠ 0, linarith,
+    have h : z.norm_sq ≠ 0,
+      linarith,
     -- finally ready
     ext;
     simp;
