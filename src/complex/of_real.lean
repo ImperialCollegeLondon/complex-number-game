@@ -1,4 +1,10 @@
-import complex.norm_sq
+/-
+Copyright (c) 2020 The Xena project. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Kevin Buzzard.
+Thanks: Imperial College London, leanprover-community
+-/
+import complex.norm_sq -- solutions to levels 1 to 3
 
 /-! # Level 4 : Coercion 
 
