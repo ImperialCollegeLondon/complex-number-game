@@ -6,21 +6,49 @@ Thanks: Imperial College London, leanprover-community
 -/
 import complex.kb_solutions.of_real -- solutions to levels 1 to 4
 
+noncomputable theory 
+
 namespace complex
 
 -- Define the inverse of a complex number
 
 /-- The inverse of a complex number-/
-def inv (z : ℂ) : ℂ := sorry
+noncomputable def inv (z : ℂ) : ℂ :=
+⟨re(z)/norm_sq(z), -im(z)/norm_sq(z)⟩
 
--- Note that you should ensure that the inverse of 0 to be 0.
+instance : has_inv ℂ := ⟨inv⟩
+
+@[simp] lemma inv_re (z : ℂ) :
+  re(z⁻¹) = re(z)/norm_sq(z) := rfl
+
+@[simp] lemma inv_im (z : ℂ) :
+  im(z⁻¹) = -im(z)/norm_sq(z) := rfl
 
 /-- The complex numbers are a field -/
 instance : field ℂ :=
-{ inv := begin sorry end,
-  inv_zero := sorry,
-  zero_ne_one := sorry,
-  mul_inv_cancel := begin sorry end,
+{ inv := has_inv.inv,
+  inv_zero := begin ext; simp end,
+  zero_ne_one := begin
+    intro h,
+    rw ext_iff at h,
+    cases h with hr hi,
+    change (0 : ℝ) = 1 at hr,
+    linarith,
+  end,
+  mul_inv_cancel := begin
+    intros z hz,
+    -- why is everything in such a weird state?
+    change z ≠ 0 at hz,
+    change z * z⁻¹ = 1,
+    rw ←norm_sq_pos at hz,
+    have h : z.norm_sq ≠ 0, linarith,
+    -- finally ready
+    ext;
+    simp;
+    field_simp [h];
+    try {simp [norm_sq]};
+    ring
+  end,
   ..complex.comm_ring }
 
 end complex
