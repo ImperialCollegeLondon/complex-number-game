@@ -1,11 +1,14 @@
+/-
+Copyright (c) 2020 The Xena project. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Author: Kevin Buzzard
+Thanks: Imperial College London, leanprover-community
+-/
+
 -- import solutions to level 1
 import complex.I
 
-/-! 
-
-# Level 2: Complex conjugation
-
--/
+/-! # Level 2: Complex conjugation -/
 
 namespace complex
 
@@ -28,7 +31,7 @@ def conj (z : ℂ) : ℂ := sorry
 @[simp] lemma conj_I : conj I = -I := sorry
 @[simp] lemma conj_neg_I : conj (-I) = I := sorry
 
-/-! # Behaviour with respect to +, - and * -/
+/-! ## Behaviour with respect to +, - and * -/
 
 @[simp] lemma conj_add (z w : ℂ) : conj (z + w) = conj z + conj w :=
 sorry
@@ -39,7 +42,7 @@ sorry
 @[simp] lemma conj_mul (z w : ℂ) : conj (z * w) = conj z * conj w :=
 sorry
 
-/-! # Properties of the `conj` map -/
+/-! ## Properties of the `conj` map -/
 
 @[simp] lemma conj_conj (z : ℂ) : conj (conj z) = z :=
 sorry
