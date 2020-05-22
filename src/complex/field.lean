@@ -6,6 +6,11 @@ Thanks: Imperial College London, leanprover-community
 -/
 import complex.of_real -- solutions to levels 1 to 4
 
+-- If you know what "the reals don't have decidable
+-- equality" means then you know why the next line
+-- is there, and if you don't then you probably don't care.
+noncomputable theory
+
 namespace complex
 
 -- Define the inverse of a complex number
@@ -17,7 +22,7 @@ def inv (z : ℂ) : ℂ := sorry
 
 /-- The complex numbers are a field -/
 instance : field ℂ :=
-{ inv := begin sorry end,
+{ inv := inv,
   inv_zero := sorry,
   zero_ne_one := sorry,
   mul_inv_cancel := begin sorry end,
