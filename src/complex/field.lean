@@ -11,20 +11,25 @@ import complex.of_real -- solutions to levels 1 to 4
 -- is there, and if you don't then you probably don't care.
 noncomputable theory
 
-namespace complex
+/-! # Level 5 : the complex numbers are a field -/
 
--- Define the inverse of a complex number
+namespace complex
 
 /-- The inverse of a complex number-/
 def inv (z : ℂ) : ℂ := sorry
 
--- Note that you should ensure that the inverse of 0 to be 0.
+instance : has_inv ℂ := ⟨inv⟩
+
+@[simp] lemma inv_re (z : ℂ) : re(z⁻¹) = re(z)/norm_sq(z) := sorry
+@[simp] lemma inv_im (z : ℂ) : im(z⁻¹) = -im(z)/norm_sq(z) := sorry
+
+-- click on a `sorry` to see what you have to prove
 
 /-- The complex numbers are a field -/
 instance : field ℂ :=
 { inv := inv,
-  inv_zero := sorry,
-  zero_ne_one := sorry,
+  inv_zero := begin sorry end,
+  zero_ne_one := begin sorry end, 
   mul_inv_cancel := begin sorry end,
   ..complex.comm_ring }
 
