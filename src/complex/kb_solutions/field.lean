@@ -46,9 +46,8 @@ instance : field ℂ :=
       linarith,
     -- finally ready
     ext;
-    simp;
+    simp [norm_sq] at *;
     field_simp [h];
-    try {simp [norm_sq]};
     ring
   end,
   ..complex.comm_ring }
