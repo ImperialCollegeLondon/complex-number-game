@@ -206,16 +206,18 @@ begin
   ..};
   -- now the axioms
   -- of which there seem to be 11
-  -- introduce the variables
+  -- Note the semicolons, which mean "apply next tactic to all goals".
+
+  -- First introduce the variables
   intros;
   -- we now have to prove an equality between two complex numbers.
   -- It suffices to check on real and imaginary parts
-  all_goals {ext},
+  ext;
   -- the simplifier can simplify stuff like re(a+0)
-  all_goals {simp},
+  simp;
   -- all the goals now are identities between *real* numbers,
   -- and the reals are already known to be a ring
-  all_goals {ring},
+  ring,
 end
 
 
