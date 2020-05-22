@@ -15,19 +15,25 @@ noncomputable theory
 
 namespace complex
 
+/-
+
+Before we start, it's worth pointing out that a field,
+for Lean, is a non-zero commutative ring K equipped
+with an inverse map `inv: K → K`, with notation z⁻¹,
+satisfying 0⁻¹=0 and if z is non-zero then z*z⁻¹=1.
+It's easy to check that this is equivalent to the
+usual definition, where 0⁻¹ is simply not defined at all.
+
+-/
 /-- The inverse of a complex number-/
 def inv (z : ℂ) : ℂ := sorry
 
+-- notation for inverse
 instance : has_inv ℂ := ⟨inv⟩
-
-@[simp] lemma inv_re (z : ℂ) : re(z⁻¹) = re(z)/norm_sq(z) := sorry
-@[simp] lemma inv_im (z : ℂ) : im(z⁻¹) = -im(z)/norm_sq(z) := sorry
-
--- click on a `sorry` to see what you have to prove
 
 /-- The complex numbers are a field -/
 instance : field ℂ :=
-{ inv := inv,
+{ inv := has_inv.inv,
   inv_zero := begin sorry end,
   zero_ne_one := begin sorry end, 
   mul_inv_cancel := begin sorry end,
