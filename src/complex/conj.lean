@@ -53,13 +53,23 @@ sorry
 @[simp] lemma conj_eq_zero {z : ℂ} : conj z = 0 ↔ z = 0 :=
 sorry
 
+/-
+
+A ring homomorphism in Lean is the following collection
+of data: a map, and the proof that it commutes with
+the ring structures in the obvious way. Here we observe
+that the work we've done is enough to define the
+ring homomorphism complex conjugation.
+
+-/
+
 /-- the ring homomorphism complex conjugation -/
 def Conj : ℂ →+* ℂ :=
 { to_fun := conj,
-  map_zero' := begin sorry end,
-  map_one' := begin sorry end,
-  map_add' := begin sorry end,
-  map_mul' := begin sorry end
+  map_zero' := conj_zero,
+  map_one' := conj_one,
+  map_add' := conj_add,
+  map_mul' := conj_mul
 }
 
 -- Two optional lemmas which computer scientists like,
