@@ -73,23 +73,10 @@ def Conj : ℂ →+* ℂ :=
   map_mul' := conj_mul,
 }
 
-#exit -- to get rid of future import warnings
--- I still need to do two questions here
-
 open function
 
-lemma conj_involutive : involutive conj :=
-begin
-  unfold involutive,
-  simp,
-end
+lemma conj_involutive : involutive conj := conj_conj
 
-lemma conj_bijective : bijective conj :=
-begin
-  unfold bijective,
-  sorry -- TODO
-end
-
-
+lemma conj_bijective : bijective conj := conj_involutive.bijective
 
 end complex
