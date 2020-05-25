@@ -56,11 +56,43 @@ end
 end complex
 
 -- Computer scientists tell me some theory of the reals is complete
--- so tactics should be able to do that.
+-- So why so I have to prove these by hand?
 
--- Here's my "pretend tactic" which does that
+lemma real_tac1 (x y : ℝ) : 0 ≤ x * x + y * y :=
+begin
+  apply add_nonneg;
+  apply mul_self_nonneg,
+end
 
-constant real_tac : false
+lemma real_tac2 (x y : ℝ) : x * x + y * y = 0 ↔ x = 0 ∧ y = 0 :=
+begin
+  split,
+  { intro h,
+    rw add_eq_zero_iff' at h,
+    { simp * at *},
+    { apply mul_self_nonneg},
+    { apply mul_self_nonneg}},
+  { rintros ⟨rfl, rfl⟩,
+    simp,
+  }
+end
+
+lemma real_tac3 {x y : ℝ} (h1 : x * x + y * y ≤ 0) : y = 0 :=
+begin
+  suffices : x = 0 ∧ y = 0,
+    simp [this],
+  rw ←real_tac2,
+  apply le_antisymm h1,
+  apply real_tac1,
+end
+
+lemma real_tac4 (x y : ℝ) (h1 : x * x + y * y ≤ 0) : x = 0 :=
+begin
+  rw add_comm at h1,
+  apply real_tac3 h1,
+end
+
+lemma real_tac5 (y : ℝ) : 0 ≤ y * y := mul_self_nonneg y
 
 namespace complex
 -- Introducing 
@@ -68,18 +100,14 @@ lemma norm_sq_nonneg (z : ℂ) : 0 ≤ norm_sq z :=
 begin
   simp [norm_sq],
   -- (x y : ℝ) ⊢ 0 ≤ x * x + y * y
-  apply false.elim real_tac, -- I am not doing the work of a tactic
+  apply real_tac1,
 end
 
 @[simp] lemma norm_sq_eq_zero {z : ℂ} : norm_sq z = 0 ↔ z = 0 :=
 begin
   cases z with x y,
   simp [norm_sq],
-  /-
-    x y : ℝ
-    ⊢ x * x + y * y = 0 ↔ x = 0 ∧ y = 0
-  -/
-  apply false.elim real_tac, -- I am not doing the work of a tactic
+  apply real_tac2,
 end
 
 @[simp] lemma norm_sq_pos {z : ℂ} : 0 < norm_sq z ↔ z ≠ 0 :=
@@ -99,27 +127,13 @@ begin
     { apply h hre,
       cases z with x y,  
       dsimp at *, 
-      /-
-        x y : ℝ,
-        h2 : x * x + y * y ≤ 0,
-        hre : x = 0
-        ⊢ y = 0
-      -/
-      apply false.elim real_tac, -- I am not doing the work of a tactic
+      apply real_tac3 h2,
     },
     { 
       apply hre,
       cases z with x y,
       dsimp at *,
-      /-
-        1 goal
-        x y : ℝ,
-        h : x = 0 → ¬y = 0,
-        h2 : x * x + y * y ≤ 0,
-        hre : ¬x = 0
-        ⊢ x = 0
-      -/
-      apply false.elim real_tac, -- I am not doing the work of a tactic
+      apply real_tac4 x y h2,
     }
   }
 end
@@ -129,11 +143,7 @@ lemma re_sq_le_norm_sq (z : ℂ) : z.re * z.re ≤ norm_sq z :=
 begin
   cases z with x y,
   simp [norm_sq],
-  /-
-    y : ℝ
-    ⊢ 0 ≤ y * y
-  -/
-  apply false.elim real_tac, -- I am not doing the work of a tactic
+  apply real_tac5,
 end
 
 
@@ -141,7 +151,7 @@ lemma im_sq_le_norm_sq (z : ℂ) : z.im * z.im ≤ norm_sq z :=
 begin
   cases z with x y,
   simp [norm_sq],
-  apply false.elim real_tac, -- I am not doing the work of a tactic
+  apply real_tac5,
 end
 
 end complex
