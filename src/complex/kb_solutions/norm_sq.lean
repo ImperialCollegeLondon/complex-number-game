@@ -138,7 +138,6 @@ begin
   }
 end
 
-
 lemma re_sq_le_norm_sq (z : ℂ) : z.re * z.re ≤ norm_sq z :=
 begin
   cases z with x y,
