@@ -5,10 +5,10 @@ Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
 -/
 
--- import solutions to level 1
-import complex.I
+-- import solutions to level 2
+import complex.Level_02_I
 
-/-! # Level 2: Complex conjugation -/
+/-! # Level 3: Complex conjugation -/
 
 namespace complex
 
@@ -41,6 +41,20 @@ sorry
 
 @[simp] lemma conj_mul (z w : ℂ) : conj (z * w) = conj z * conj w :=
 sorry
+
+/-! ## Behaviour with respect to real numbers -/
+
+@[simp] lemma conj_of_real (r : ℝ) : conj r = r := sorry
+
+lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
+sorry
+
+lemma eq_conj_iff_re {z : ℂ} : conj z = z ↔ (z.re : ℂ) = z :=
+sorry
+
+theorem add_conj (z : ℂ) : z + conj z = (2 * z.re : ℝ) :=
+sorry
+
 
 /-! ## Properties of the `conj` map -/
 

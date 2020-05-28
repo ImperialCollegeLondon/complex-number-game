@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.basic -- tutorial level
+import complex.Level_01_of_real -- tutorial level
 /-! 
 
-# Level 1: I 
+# Level 2: I 
 
 I find it unbelievable that we have written quite a lot of code about the complex numbers
 and we've still never defined i, or j, or I, or $$\sqrt{-1}$$, or whatever it's called. 
@@ -47,6 +47,11 @@ end
 begin
   sorry
 end
+
+lemma mk_eq_add_mul_I (a b : ℝ) : (⟨a, b⟩ : ℂ) = a + b * I := sorry
+
+@[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z := sorry
+
 
 /-
   Bonus level. Hint: don't forget ext_iff. It's defined

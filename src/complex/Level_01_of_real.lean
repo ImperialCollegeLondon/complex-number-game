@@ -4,12 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.norm_sq -- solutions to levels 1 to 3
+import complex.Level_00_basic -- definition and basic properties of ℂ
 
-/-! # Level 4 : Coercion 
+/-! # Level 1 : the map from ℝ to ℂ
 
-This file sets up the coercion from the reals to the complexes, sending `r` to `⟨r, 0⟩`.
-Mathematically it is relatively straightforward.
+This file sets up the coercion from the reals to the complexes,
+sending `r` to `⟨r, 0⟩`. Mathematically it is straightforward.
 
 -/
 
@@ -34,7 +34,9 @@ instance : has_coe ℝ ℂ := ⟨of_real⟩
 /-
 As usual, we need to train the `simp` tactic. But we also need to train
 the `norm_cast` tactic. The `norm_cast` tactic enables Lean to prove
-results like r^2=2*s for reals `r` and `s`, if it knows that `(r : ℂ)^2 = 2*(s : ℂ)`.
+results like r^2=2*s for reals `r` and `s`, if it knows that
+`(r : ℂ)^2 = 2*(s : ℂ)`. Such results are intuitive for matheamticians
+but involve "invisible maps" in Lean
 -/
 
 @[simp, norm_cast] lemma of_real_re (r : ℝ) : (r : ℂ).re = r := sorry
@@ -43,11 +45,30 @@ results like r^2=2*s for reals `r` and `s`, if it knows that `(r : ℂ)^2 = 2*(s
 -- The map from the reals to the complexes is injective, something we
 -- write in iff form so `simp` can use it; `simp` also works on `iff` goals.
 
-@[simp, norm_cast] theorem of_real_inj {z w : ℝ} : (z : ℂ) = w ↔ z = w := sorry
+@[simp, norm_cast] theorem of_real_inj {r s : ℝ} : (r : ℂ) = s ↔ r = s := sorry
+
+-- what does norm_cast do?? Here are two examples of usage:
 
 /-
-We now go through all our basic constants and constructions, namely 0, 1, +, *, I, conj and norm_sq,
-and tell the simplifier how they behave with respect to this new function. 
+
+example (r s : ℝ) (h : (r : ℂ) = s) : r = s :=
+begin
+  norm_cast at h,
+  exact h,
+end
+
+example (r s : ℝ) (h : r = s) : (r : ℂ) = (s : ℂ) :=
+begin
+  norm_cast,
+  exact h,
+end
+
+-/
+
+/-
+We now go through all the basic constants and constructions we've defined so far,
+namely 0, 1, +, -, *, and tell the simplifier how they behave with respect to this
+new function. 
 -/
 
 /-! ## zero -/
@@ -83,40 +104,13 @@ begin
   sorry
 end
 
-/-! ## I -/
+/-! ## numerals.
 
-lemma mk_eq_add_mul_I (a b : ℝ) : complex.mk a b = a + b * I := sorry
+This is quite a computer-sciency bit.
 
-@[simp] lemma re_add_im (z : ℂ) : (z.re : ℂ) + z.im * I = z := sorry
-
-
-/-! ## conj -/
-
-@[simp] lemma conj_of_real (r : ℝ) : conj r = r := sorry
-
-lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
-sorry
-
-lemma eq_conj_iff_re {z : ℂ} : conj z = z ↔ (z.re : ℂ) = z :=
-sorry
-
-theorem add_conj (z : ℂ) : z + conj z = (2 * z.re : ℝ) :=
-sorry
-
-/-! ## norm_sq -/
-
-@[simp] lemma norm_sq_of_real (r : ℝ) : norm_sq r = r * r :=
-sorry
-
-theorem mul_conj (z : ℂ) : z * conj z = norm_sq z :=
-sorry
-
-/-! ## Appendix: numerals.
-
-If you're not a computer scientist feel free to skip this bit. 
-
-These last two are to do with the canonical map from numerals into the complexes, e.g. `(23 : ℂ)`.
-Lean stores the numeral in binary. See for example
+These last two lemmas are to do with the canonical map from numerals
+into the complexes, e.g. `(23 : ℂ)`. Lean stores the numeral in binary.
+See for example
 
 set_option pp.numerals false
 #check (37 : ℂ)-- bit1 (bit0 (bit1 (bit0 (bit0 has_one.one)))) : ℂ
@@ -132,3 +126,29 @@ We need these results so that `norm_cast` can prove results such as (↑(37 : �
 @[simp, norm_cast] lemma of_real_bit1 (r : ℝ) : ((bit1 r : ℝ) : ℂ) = bit1 r := sorry
 
 end complex
+
+/-! ## norm_cast examples 
+
+The idea is that the "invisible map" from the reals to the complexes should not
+create any trouble to mathematicians who just want things to work as normal
+
+https://xenaproject.wordpress.com/2020/04/30/the-invisible-map/
+
+-/
+
+example (a b c : ℝ) : ((a * b : ℝ) : ℂ) * c = (a : ℂ) * b * c :=
+begin
+  norm_cast,
+end
+
+example (a b c : ℝ) : ((a : ℂ) + b) * c = ((a + b) * c : ℝ) :=
+begin
+  norm_cast,
+end
+
+example : (37 : ℂ) = (37 : ℝ) :=
+begin
+  norm_cast,
+end
+
+

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.of_real -- solutions to levels 1 to 4
+import complex.Level_04_norm_sq -- levels 1 to 4
 
 -- If you know what "the reals don't have decidable
 -- equality" means then you know why the next line

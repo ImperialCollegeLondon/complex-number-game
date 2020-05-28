@@ -5,7 +5,7 @@ Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
 
-import complex.conj -- solutions to levels 1 and 2
+import complex.Level_03_conj -- Levels 1 to 3
 
 /-! 
 
@@ -42,6 +42,14 @@ sorry
 /-! ## Behaviour with respect to `conj` -/
 
 @[simp] lemma norm_sq_conj (z : ℂ) : norm_sq (conj z) = norm_sq z :=
+sorry
+
+/-! ## Behaviour with respect to real numbers` -/
+
+@[simp] lemma norm_sq_of_real (r : ℝ) : norm_sq r = r * r :=
+sorry
+
+theorem mul_conj (z : ℂ) : z * conj z = norm_sq z :=
 sorry
 
 /-! ## Behaviour with respect to real 0, ≤, < and so on -/
