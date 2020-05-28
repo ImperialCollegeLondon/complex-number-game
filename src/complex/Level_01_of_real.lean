@@ -66,9 +66,9 @@ end
 -/
 
 /-
-We now go through all the basic constants and constructions we've defined so far,
-namely 0, 1, +, -, *, and tell the simplifier how they behave with respect to this
-new function. 
+We now go through all the basic constants and constructions we've defined so
+far, namely 0, 1, +, -, *, and tell the simplifier how they behave with respect
+to this new function. 
 -/
 
 /-! ## zero -/
@@ -117,13 +117,15 @@ set_option pp.numerals false
 
 `bit0 x` is defined to be `x + x`, and `bit1 x` is defined to be `bit0 x + 1`.
 
-We need these results so that `norm_cast` can prove results such as (↑(37 : ℝ) : ℂ) = 37 : ℂ
-(i.e. coercion commutes with numerals)
+We need these results so that `norm_cast` can prove results such
+as (↑(37 : ℝ) : ℂ) = 37 : ℂ (i.e. coercion commutes with numerals)
 
 -/
 
-@[simp, norm_cast] lemma of_real_bit0 (r : ℝ) : ((bit0 r : ℝ) : ℂ) = bit0 r := sorry
-@[simp, norm_cast] lemma of_real_bit1 (r : ℝ) : ((bit1 r : ℝ) : ℂ) = bit1 r := sorry
+@[simp, norm_cast] lemma of_real_bit0 (r : ℝ) : ((bit0 r : ℝ) : ℂ) = bit0 r :=
+sorry
+@[simp, norm_cast] lemma of_real_bit1 (r : ℝ) : ((bit1 r : ℝ) : ℂ) = bit1 r :=
+sorry
 
 end complex
 
@@ -134,7 +136,7 @@ create any trouble to mathematicians who just want things to work as normal
 
 https://xenaproject.wordpress.com/2020/04/30/the-invisible-map/
 
--/
+
 
 example (a b c : ℝ) : ((a * b : ℝ) : ℂ) * c = (a : ℂ) * b * c :=
 begin
@@ -151,4 +153,4 @@ begin
   norm_cast,
 end
 
-
+-/
