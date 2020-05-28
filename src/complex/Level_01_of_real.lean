@@ -11,6 +11,10 @@ import complex.Level_00_basic -- definition and basic properties of ℂ
 This file sets up the coercion from the reals to the complexes,
 sending `r` to `⟨r, 0⟩`. Mathematically it is straightforward.
 
+All the proofs below are sorried. You can try them in tactic mode
+by replacing `sorry` with `begin end` and then starting to write 
+tactics in the `begin end` block.
+
 -/
 
 namespace complex
