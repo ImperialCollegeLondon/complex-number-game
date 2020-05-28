@@ -19,12 +19,12 @@ real and imaginary parts)
 
 This file has no `sorry`s in. All of the other levels:
 
-`I.lean`
-`conj.lean`
-`norm_sq.lean`
-`of_real.lean`
-`field.lean`
-`alg_closed.lean`
+`Level_01_of_real.lean`
+`Level_02_I.lean`
+`Level_03_conj.lean`
+`Level_04_norm_sq.lean`
+`Level_05_field.lean`
+`Level_06_alg_closed.lean`
 
 have sorrys, indicating puzzles to be solved.
 
