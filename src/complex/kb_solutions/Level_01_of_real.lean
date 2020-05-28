@@ -127,6 +127,15 @@ begin
   simp  
 end
 
+/-- The canonical ring homomorphism from ℝ to ℂ -/
+def Of_real : ℝ →+* ℂ :=
+{ to_fun := of_real,
+  map_zero' := of_real_zero,
+  map_one' := of_real_one,
+  map_add' := of_real_add,
+  map_mul' := of_real_mul,
+}
+
 /-! ## numerals.
 
 This is quite a computer-sciency bit.
