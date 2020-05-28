@@ -46,6 +46,8 @@ sorry
 
 @[simp] lemma conj_of_real (r : ℝ) : conj r = r := sorry
 
+lemma im_eq_zero_of_eq_conj {z : ℂ} : conj z = z → im z = 0 := sorry
+
 lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
 sorry
 
