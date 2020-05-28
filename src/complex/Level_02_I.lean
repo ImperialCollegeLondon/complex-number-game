@@ -9,9 +9,10 @@ import complex.Level_01_of_real -- tutorial level
 
 # Level 2: I 
 
-I find it unbelievable that we have written quite a lot of code about the complex numbers
-and we've still never defined i, or j, or I, or $$\sqrt{-1}$$, or whatever it's called. 
-Why don't you supply the definition, and make the basic API?
+I find it unbelievable that we have written quite a lot of code about the
+complex numbers and we've still never defined i, or j, or I, or $$\sqrt{-1}$$,
+or whatever it's called.  Why don't you supply the definition, and make the
+basic API?
 
 All the proofs below are sorried. You can try them in tactic mode
 by replacing `sorry` with `begin end` and then starting to write 
@@ -59,6 +60,7 @@ lemma mk_eq_add_mul_I (a b : ℝ) : (⟨a, b⟩ : ℂ) = a + b * I := sorry
    
   ext_iff : ∀ {z w : ℂ}, z = w ↔ z.re = w.re ∧ z.im = w.im
 -/
+
 /-- I is non-zero -/
 lemma I_ne_zero : (I : ℂ) ≠ 0 :=
 begin
