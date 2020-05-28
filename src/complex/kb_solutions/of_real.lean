@@ -21,7 +21,7 @@ instance : has_coe ℝ ℂ := ⟨of_real⟩
 @[simp, norm_cast] theorem of_real_inj {z w : ℝ} : (z : ℂ) = w ↔ z = w :=
 begin
   split,
-  { rintro ⟨⟨⟩,_⟩,
+  { rintro ⟨⟩,
     refl},
   { cc}
 end
