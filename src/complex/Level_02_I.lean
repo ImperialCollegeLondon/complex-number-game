@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.Level_01_of_real -- tutorial level
+
+-- import level 1
+import complex.Level_01_of_real
+
 /-! 
 
 # Level 2: I 

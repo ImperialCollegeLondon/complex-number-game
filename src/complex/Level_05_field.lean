@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.Level_04_norm_sq -- levels 1 to 4
 
--- If you know what "the reals don't have decidable
--- equality" means then you know why the next line
--- is there, and if you don't then you probably don't care.
+-- Import levels 1 to 4
+import complex.Level_04_norm_sq
+
+/-
+If you know what "the reals don't have decidable
+equality" means then you know why the next line
+is there, and if you don't then you probably don't care.
+-/
+
 noncomputable theory
 
 /-! # Level 5 : the complex numbers are a field -/

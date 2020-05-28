@@ -42,8 +42,8 @@ have sorrys, indicating puzzles to be solved.
 
 -/
 
-/-- A complex number is defined to be a structure consisting of two real numbers,
-    the real part and the imaginary part of the complex number   . -/
+/-- A complex number is defined to be a structure consisting of two real
+  numbers, the real part and the imaginary part of the complex numberd. -/
 structure complex : Type :=
 (re : ℝ) (im : ℝ)
 
@@ -157,47 +157,63 @@ instance : has_neg ℂ := ⟨neg⟩
 -- multiplication
 
 /-- Multiplication `z*w` of two complex numbers -/
-def mul (z w : ℂ) : ℂ := ⟨re(z) * re(w) - im(z) * im(w), re(z) * im(w) + im(z) * re(w)⟩
+def mul (z w : ℂ) : ℂ :=
+  ⟨re(z) * re(w) - im(z) * im(w), re(z) * im(w) + im(z) * re(w)⟩
 
 /-- Notation `*` for multiplication -/
 instance : has_mul ℂ := ⟨mul⟩
 
 -- how `mul` reacts with `re` and `im`
-@[simp] lemma mul_re (z w : ℂ) : re(z * w) = re(z) * re(w) - im(z) * im(w) := begin refl end
-@[simp] lemma mul_im (z w : ℂ) : im(z * w) = re(z) * im(w) + im(z) * re(w) := begin refl end
+@[simp] lemma mul_re (z w : ℂ) : re(z * w) = re(z) * re(w) - im(z) * im(w) :=
+begin
+  refl
+end
 
-/-! ## Example of what `simp` can now do -/
+@[simp] lemma mul_im (z w : ℂ) : im(z * w) = re(z) * im(w) + im(z) * re(w) :=
+rfl
 
-example (a b c : ℂ) : re(a*(b+c)) = re(a) * (re(b) + re(c)) - im(a) * (im(b) + im(c)) :=
+/-! ## Example of what `simp` can now do
+
+example (a b c : ℂ) :
+  re(a*(b+c)) = re(a) * (re(b) + re(c)) - im(a) * (im(b) + im(c)) :=
 begin
   simp,
 end
+
+-/
 
 
 /-! # `ext` : A mathematical triviality -/
 
 /- 
-Two complex numbers with the same and imaginary parts are equal.
-This is an "extensionality lemma", i.e. a lemma of the form "if two things
-are made from the same pieces, they are equal".
-This is not hard to prove, but we want to give the result a name
-so we can tag it with the `ext` attribute, meaning that the
-`ext` tactic will know it. To add to the confusion, let's call the theorem `ext` :-)
+Two complex numbers with the same and imaginary parts are equal. This is an
+"extensionality lemma", i.e. a lemma of the form "if two things are made from
+the same pieces, they are equal". This is not hard to prove, but we want to
+give the result a name so we can tag it with the `ext` attribute, meaning that
+the `ext` tactic will know it. To add to the confusion, let's call the
+theorem `ext` :-)
 -/
 
-/-- If two complex numbers z and w have equal real and imaginary parts, they are equal -/
-@[ext] theorem ext {z w : ℂ} (hre : re(z) = re(w)) (him : im(z) = im(w)) : z = w :=
+/-- If two complex numbers z and w have equal real and imaginary parts,
+    they are equal -/
+@[ext] theorem ext {z w : ℂ}
+  (hre : re(z) = re(w)) (him : im(z) = im(w)) : z = w :=
 begin
   cases z with zr zi,
   cases w with ww wi,
   simp * at *,
 end
 
-/-! # Theorem:  The complex numbers are a commutative ring -/
+/-! # Theorem:  The complex numbers are a commutative ring
 
--- Proof: we've defined all the structure, and every axiom can be checked by reducing it
--- to checking real and imaginary parts with `ext`, expanding everything out with `simp`
--- and then using the fact that the real numbers are a commutative ring.
+Proof: we've defined all the structure, and every axiom can be checked by
+reducing it to checking real and imaginary parts with `ext`, expanding
+everything out with `simp`, and then using the fact that the real numbers are
+a commutative ring (which we already know)
+
+-/
+
+/-- The complex numbers are a commutative ring -/
 instance : comm_ring ℂ :=
 begin
   -- first the data
@@ -221,16 +237,20 @@ begin
 end
 
 
--- That is the end of the proof that the complexes form a ring. We built
--- a basic API which was honed towards the general idea that to prove
--- certain statements about the complex numbers, for example distributivity,
--- we could just check on real and imaginary parts. We trained the
--- simplifier to expand out things like re(z*w) in terms
--- of re(z), im(z), re(w), im(w).
+/-
+
+That is the end of the proof that the complexes form a ring. We built
+a basic API which was honed towards the general idea that to prove
+certain statements about the complex numbers, for example distributivity,
+we could just check on real and imaginary parts. We trained the
+simplifier to expand out things like re(z*w) in terms
+of re(z), im(z), re(w), im(w).
+
+-/
 
 /-!
 
-# Optional section for mathematicians : more basic infrastructure, and term mode
+# Optional (for mathematicians) : more basic infrastructure, and term mode
 
 -/
 
@@ -239,7 +259,8 @@ end
 
 Recall extensionality:
 
-`theorem ext {z w : ℂ} (hre : re(z) = re(w)) (him : im(z) = im(w)) : z = w := ...`
+theorem ext {z w : ℂ}
+  (hre : re(z) = re(w)) (him : im(z) = im(w)) : z = w := ...
 
 Here is another tactic mode proof of extensionality. Note that we have moved
 the hypotheses to the other side of the colon; this does not
@@ -254,10 +275,13 @@ begin
 end
 
 
-/-
-Explanation: `rintros` does `cases` as many times as you like using this cool `⟨ ⟩` syntax
-for the case splits. Note that if you say that a proof of `a = b` is `rfl` then
-Lean will define a to be b, or b to be a, and not even introduce new notation for it.
+/-!
+
+Explanation: `rintros` does `cases` as many times as you like using this cool
+`⟨ ⟩` syntax for the case splits. Note that if you say that a proof of `a = b`
+is `rfl` then Lean will define a to be b, or b to be a, and not even introduce
+new notation for it.
+
 -/
 
 -- Here is the same proof in term mode.
@@ -313,7 +337,8 @@ The below variant `ext_iff` is the two-way implication: two complex
 numbers are equal if and only if they have the same real and imaginary part.
 Let's first see a tactic mode proof. See how the `ext` tactic is used?
 After it is applied, we have two goals, both of which are hypotheses.
-The semicolon means "apply the next tactic to all the goals produced by this one"
+The semicolon means "apply the next tactic to all the goals
+produced by this one"
 -/
 
 theorem ext_iff {z w : ℂ} : z = w ↔ z.re = w.re ∧ z.im = w.im :=

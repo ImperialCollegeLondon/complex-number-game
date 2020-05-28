@@ -5,7 +5,7 @@ Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
 -/
 
--- import solutions to level 2
+-- import levels 1 and 2
 import complex.Level_02_I
 
 /-! # Level 3: Complex conjugation -/

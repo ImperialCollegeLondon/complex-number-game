@@ -5,14 +5,15 @@ Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
 
-import complex.Level_03_conj -- Levels 1 to 3
+-- Import levels 1 to 3
+import complex.Level_03_conj
 
 /-! 
 
-# Level 3: Norms
+# Level 4: Norms
 
-Define `norm_sq : ℂ → ℝ` by defining `norm_sq(z)` to be `re(z)*re(z)+im(z)*im(z)` and see
-what you can prove about it.
+Define `norm_sq : ℂ → ℝ` by defining `norm_sq(z)` to be
+`re(z)*re(z)+im(z)*im(z)` and see what you can prove about it.
 
 -/
 

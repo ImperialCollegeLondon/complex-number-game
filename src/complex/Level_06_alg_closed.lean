@@ -5,8 +5,11 @@ Author: Kevin Buzzard
 Thanks: Imperial College London, leanprover-community
 -/
 
-import data.polynomial -- polynomials in one variable over rings
-import complex.Level_05_field -- solutions to levels 1 to 5
+-- Import levels 1 to 5
+import complex.Level_05_field
+
+ -- Import the theory polynomials in one variable over rings
+import data.polynomial
 /-! 
 
 # Level 6: The complex numbers are algebraically closed
@@ -17,7 +20,8 @@ namespace complex
 
 open polynomial
 
-lemma exists_root {f : polynomial ℂ} (hf : 0 < degree f) : ∃ z : ℂ, is_root f z :=
+lemma exists_root {f : polynomial ℂ} (hf : 0 < degree f) :
+  ∃ z : ℂ, is_root f z :=
 begin
   sorry
 end
