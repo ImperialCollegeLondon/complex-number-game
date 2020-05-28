@@ -1,8 +1,8 @@
 [package]
 name = "complex_number_game"
 version = "0.1"
-lean_version = "leanprover-community/lean:3.13.2"
+lean_version = "leanprover-community/lean:3.14.0"
 path = "src"
 
 [dependencies]
-mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "cbe80ed26d0d8ca6def780e403396b4299fe1fa6"}
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "efb4e9594edf6bdbaa960036eba90dd631d11899"}
