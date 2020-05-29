@@ -25,7 +25,7 @@ namespace complex
 -- sending the real number r to the complex number ⟨r, 0⟩
 
 /-- The canonical map from ℝ to ℂ. -/
-def of_real (r : ℝ) : ℂ := sorry
+def of_real (r : ℝ) : ℂ := { re := r, im := 0}
 
 /-
 We make this map into a *coercion*, which means that if `(r : ℝ)` is a real
@@ -33,6 +33,7 @@ number, then `(r : ℂ)` or `(↑r : ℂ)` will indicate the corresponding
 complex number with no imaginary part. This is the notation we shall
 use in our `simp` lemmas.
 -/
+
 
 /-- The coercion from ℝ to ℂ sending `r` to the complex number `⟨r, 0⟩` -/
 instance : has_coe ℝ ℂ := ⟨of_real⟩
@@ -45,17 +46,22 @@ results like r^2=2*s for reals `r` and `s`, if it knows that
 but involve "invisible maps" in Lean
 -/
 
-@[simp, norm_cast] lemma of_real_re (r : ℝ) : (r : ℂ).re = r := sorry
-@[simp, norm_cast] lemma of_real_im (r : ℝ) : (r : ℂ).im = 0 := sorry
+@[simp, norm_cast] lemma of_real_re (r : ℝ) : (r : ℂ).re = r :=
+begin
+  refl,
+end
+
+@[simp, norm_cast] lemma of_real_im (r : ℝ) : (r : ℂ).im = 0 := rfl
 
 -- The map from the reals to the complexes is injective, something we
 -- write in iff form so `simp` can use it; `simp` also works on `iff` goals.
 
-@[simp, norm_cast] theorem of_real_inj {r s : ℝ} : (r : ℂ) = s ↔ r = s := sorry
+@[simp, norm_cast] theorem of_real_inj {r s : ℝ} : (r : ℂ) = s ↔ r = s :=
+by simp [ext_iff]
 
 -- what does norm_cast do?? Here are two examples of usage:
 
-/-
+
 
 example (r s : ℝ) (h : (r : ℂ) = s) : r = s :=
 begin
@@ -69,7 +75,7 @@ begin
   exact h,
 end
 
--/
+
 
 /-
 We now go through all the basic constants and constructions we've defined so
@@ -79,35 +85,51 @@ to this new function.
 
 /-! ## zero -/
 
-@[simp, norm_cast] lemma of_real_zero : ((0 : ℝ) : ℂ) = 0 := sorry
+@[simp, norm_cast] lemma of_real_zero : ((0 : ℝ) : ℂ) = 0 :=
+begin
+  refl,
+end
 
-@[simp] theorem of_real_eq_zero {z : ℝ} : (z : ℂ) = 0 ↔ z = 0 := sorry
+-- for this file only, the simplifier knows about ext_iff
+local attribute [simp] ext_iff
 
-theorem of_real_ne_zero {z : ℝ} : (z : ℂ) ≠ 0 ↔ z ≠ 0 := sorry
+-- note to self -- change z to r
+@[simp] theorem of_real_eq_zero {r : ℝ} : (r : ℂ) = 0 ↔ r = 0 :=
+begin
+  simp
+end
+
+theorem of_real_ne_zero {z : ℝ} : (z : ℂ) ≠ 0 ↔ z ≠ 0 :=
+begin
+  simp
+end
 
 /-! ## one -/
 
-@[simp, norm_cast] lemma of_real_one : ((1 : ℝ) : ℂ) = 1 := sorry
+@[simp, norm_cast] lemma of_real_one : ((1 : ℝ) : ℂ) = 1 :=
+begin
+  refl
+end
 
 /-! ## add -/
 
 @[simp, norm_cast] lemma of_real_add (r s : ℝ) : ((r + s : ℝ) : ℂ) = r + s :=
 begin
-  sorry
+  simp
 end
 
 /-! ## neg -/
 
 @[simp, norm_cast] lemma of_real_neg (r : ℝ) : ((-r : ℝ) : ℂ) = -r :=
 begin
-  sorry
+  simp
 end
 
 /-! ## mul -/
 
 @[simp, norm_cast] lemma of_real_mul (r s : ℝ) : ((r * s : ℝ) : ℂ) = r * s :=
 begin
-  sorry
+  simp
 end
 
 /-- The canonical ring homomorphism from ℝ to ℂ -/
@@ -127,8 +149,6 @@ These last two lemmas are to do with the canonical map from numerals
 into the complexes, e.g. `(23 : ℂ)`. Lean stores the numeral in binary.
 See for example
 
-set_option pp.numerals false
-#check (37 : ℂ)-- bit1 (bit0 (bit1 (bit0 (bit0 has_one.one)))) : ℂ
 
 `bit0 x` is defined to be `x + x`, and `bit1 x` is defined to be `bit0 x + 1`.
 
@@ -137,10 +157,18 @@ as (↑(37 : ℝ) : ℂ) = 37 : ℂ (i.e. coercion commutes with numerals)
 
 -/
 
+set_option pp.numerals false
+#check (37 : ℂ)-- bit1 (bit0 (bit1 (bit0 (bit0 has_one.one)))) : ℂ
+
 @[simp, norm_cast] lemma of_real_bit0 (r : ℝ) : ((bit0 r : ℝ) : ℂ) = bit0 r :=
-sorry
+begin
+  simp [bit0],
+end
+
 @[simp, norm_cast] lemma of_real_bit1 (r : ℝ) : ((bit1 r : ℝ) : ℂ) = bit1 r :=
-sorry
+begin
+  simp [bit1],
+end
 
 end complex
 
@@ -151,7 +179,7 @@ create any trouble to mathematicians who just want things to work as normal
 
 https://xenaproject.wordpress.com/2020/04/30/the-invisible-map/
 
-
+-/
 
 example (a b c : ℝ) : ((a * b : ℝ) : ℂ) * c = (a : ℂ) * b * c :=
 begin
@@ -168,4 +196,4 @@ begin
   norm_cast,
 end
 
--/
+

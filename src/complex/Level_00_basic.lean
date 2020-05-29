@@ -300,7 +300,7 @@ part is im(z) is of course equal to z.
 -/
 
 /-- ⟨z.re, z.im⟩ is equal to z -/
-@[simp] theorem eta : ∀ z : ℂ, complex.mk z.re z.im = z :=
+@[simp] theorem eta : ∀ z : ℂ, (⟨re(z), im(z)⟩ : ℂ) = z :=
 begin
   intro z,
   cases z with x y, 
