@@ -91,13 +91,12 @@ to this new function.
 
 @[simp, norm_cast] lemma of_real_zero : ((0 : ℝ) : ℂ) = 0 := rfl
 
-@[simp] theorem of_real_eq_zero {z : ℝ} : (z : ℂ) = 0 ↔ z = 0 :=
+@[simp] theorem of_real_eq_zero {r : ℝ} : (r : ℂ) = 0 ↔ r = 0 :=
 begin
   simp,
 end
 
-
-theorem of_real_ne_zero {z : ℝ} : (z : ℂ) ≠ 0 ↔ z ≠ 0 :=
+theorem of_real_ne_zero {r : ℝ} : (r : ℂ) ≠ 0 ↔ r ≠ 0 :=
 begin
   simp
 end
