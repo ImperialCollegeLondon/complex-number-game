@@ -101,8 +101,7 @@ begin
   suffices : x = 0 ∧ y = 0,
     simp [this],
   rw ←norm_eq_zero_iff,
-  apply le_antisymm h1,
-  apply norm_nonneg
+  linarith [norm_nonneg x y],
 end
 
 lemma norm_nonpos_left (x y : ℝ) (h1 : x * x + y * y ≤ 0) : x = 0 :=
@@ -113,6 +112,9 @@ end
 
 end realtac
 
+-- back to the levels
+
+
 lemma norm_sq_nonneg (z : ℂ) : 0 ≤ norm_sq z :=
 begin
   cases z with x y,
@@ -120,19 +122,24 @@ begin
   apply realtac.norm_nonneg,
 end
 
-@[simp] lemma norm_sq_eq_zero {z : ℂ} : norm_sq z = 0 ↔ z = 0 :=
+@[simp] lemma norm_sq_eq_zero (z : ℂ) : norm_sq z = 0 ↔ z = 0 :=
 begin
   cases z with x y,
   simp [norm_sq],
   exact realtac.norm_eq_zero_iff
 end
 
+@[simp] lemma norm_sq_ne_zero {z : ℂ} : norm_sq z ≠ 0 ↔ z ≠ 0 :=
+begin
+  have h := norm_sq_eq_zero z,
+  tauto!
+end
+
 @[simp] lemma norm_sq_pos {z : ℂ} : 0 < norm_sq z ↔ z ≠ 0 :=
 begin
   rw lt_iff_le_and_ne, 
-  rw ne,
-  rw eq_comm,
-  simp [norm_sq_nonneg], -- simping with norm_sq here breaks the proof
+  rw ne_comm,
+  simp [norm_sq_nonneg],
 end
 
 lemma re_sq_le_norm_sq (z : ℂ) : z.re * z.re ≤ norm_sq z :=
