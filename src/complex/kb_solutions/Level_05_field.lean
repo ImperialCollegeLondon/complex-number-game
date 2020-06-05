@@ -59,5 +59,17 @@ instance : field ℂ :=
   end,
   ..complex.comm_ring }
 
-end complex
 
+
+def div (z w : ℂ) : ℂ := z * w⁻¹
+
+instance : has_div ℂ := ⟨complex.div⟩
+
+example : (1 : ℂ) / 0 = 0 :=
+begin
+  ext;
+  simp,
+end
+
+
+end complex
