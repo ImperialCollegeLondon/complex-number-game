@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
-import complex.kb_solutions.of_real -- solutions to levels 1 to 4
+import complex.kb_solutions.Level_04_norm_sq -- solutions to levels 1 to 4
 
 noncomputable theory 
 
