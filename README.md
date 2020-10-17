@@ -34,8 +34,8 @@ Once the project is installed on your computer, see the [instructions](INSTRUCTI
 questions. You are now too many to mention.
 
 * Patrick Massot, and all the other people who have been involved in getting
-  the `leanproject` command up and running. If you're using linux, Lean
-  projects are now really easy to install.
+  the `leanproject` command up and running. Lean projects are now really easy to install,
+  once you have everything set up.
 
 * Scott Morrison, for explaining that I had missed an opportunity to teach `simp`
   in the natural number game. My excuse: I didn't understand it at the time!
