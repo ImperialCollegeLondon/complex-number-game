@@ -77,23 +77,6 @@ begin
   }
 end
 
-lemma real_tac3 {x y : ℝ} (h1 : x * x + y * y ≤ 0) : y = 0 :=
-begin
-  suffices : x = 0 ∧ y = 0,
-    simp [this],
-  rw ←real_tac2,
-  apply le_antisymm h1,
-  apply real_tac1,
-end
-
-lemma real_tac4 (x y : ℝ) (h1 : x * x + y * y ≤ 0) : x = 0 :=
-begin
-  rw add_comm at h1,
-  apply real_tac3 h1,
-end
-
-lemma real_tac5 (y : ℝ) : 0 ≤ y * y := mul_self_nonneg y
-
 namespace complex
 -- Introducing 
 lemma norm_sq_nonneg (z : ℂ) : 0 ≤ norm_sq z :=
@@ -112,45 +95,24 @@ end
 
 @[simp] lemma norm_sq_pos {z : ℂ} : 0 < norm_sq z ↔ z ≠ 0 :=
 begin
-  -- this is a bit thorny
-  split,
-  { intro h,
-    rintro rfl,
-    simp [norm_sq] at *,
-    linarith,
-  },
-  { intro h,
-    rw ←not_le,
-    intro h2, -- I am so bad at Lean
-    simp [norm_sq] at *,
-    by_cases hre : z.re = 0,
-    { apply h hre,
-      cases z with x y,  
-      dsimp at *, 
-      apply real_tac3 h2,
-    },
-    { 
-      apply hre,
-      cases z with x y,
-      dsimp at *,
-      apply real_tac4 x y h2,
-    }
-  }
+  rw lt_iff_le_and_ne, 
+  rw ne,
+  rw eq_comm,
+  simp [norm_sq_nonneg],
 end
 
 lemma re_sq_le_norm_sq (z : ℂ) : z.re * z.re ≤ norm_sq z :=
 begin
   cases z with x y,
   simp [norm_sq],
-  apply real_tac5,
+  apply mul_self_nonneg,
 end
-
 
 lemma im_sq_le_norm_sq (z : ℂ) : z.im * z.im ≤ norm_sq z :=
 begin
   cases z with x y,
   simp [norm_sq],
-  apply real_tac5,
+  apply mul_self_nonneg,
 end
 
 end complex

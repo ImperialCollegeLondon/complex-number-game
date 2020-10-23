@@ -21,85 +21,67 @@ def conj (z : ℂ) : ℂ := ⟨re(z),-im(z)⟩
 
 /-! ## Real and imaginary parts -/
 
-@[simp] lemma conj_re (z : ℂ) : re(conj z) = re(z) :=
-begin
-  refl
-end
-
+-- true by definition; teach it to the simplifier
+@[simp] lemma conj_re (z : ℂ) : re(conj z) = re(z) := rfl
 @[simp] lemma conj_im (z : ℂ) : im(conj z) = -im(z) := rfl
 
 /-! ## Behaviour with respect to 0, 1 and I -/
 
-@[simp] lemma conj_zero : conj 0 = 0 := by ext; simp
-@[simp] lemma conj_one : conj 1 = 1 := by ext;simp
-@[simp] lemma conj_I : conj I = -I := by ext; simp
-@[simp] lemma conj_neg_I : conj (-I) = I := by ext; simp
+-- these will help the simplifier to do basic calculations
+-- because all the proofs are of the form "equate real and imaginary parts",
+-- I am going to teach `simp` about `ext_iff` for this file only
+
+local attribute [simp] ext_iff
+
+@[simp] lemma conj_zero : conj 0 = 0 := by simp
+@[simp] lemma conj_one : conj 1 = 1 := by simp
+@[simp] lemma conj_I : conj I = -I := by simp
+@[simp] lemma conj_neg_I : conj (-I) = I := by simp
 
 /-! ## Behaviour with respect to +, - and * -/
 
 @[simp] lemma conj_add (z w : ℂ) : conj (z + w) = conj z + conj w :=
-begin
-  ext; simp [add_comm]
-end
+by simp [add_comm] -- "simp" by itself fails, and the error tells you it didn't know add_comm
 
-@[simp] lemma conj_neg (z : ℂ) : conj (-z) = -conj z := by ext; simp
+@[simp] lemma conj_neg (z : ℂ) : conj (-z) = -conj z := by simp
 
 
 @[simp] lemma conj_mul (z w : ℂ) : conj (z * w) = conj z * conj w :=
-by ext; simp; ring
+by simp; ring -- algebra too hard for the simplifier
 
 /-! ## Behaviour with respect to real numbers -/
 
-@[simp] lemma conj_of_real (r : ℝ) : conj r = r := by ext; simp
+@[simp] lemma conj_of_real (r : ℝ) : conj r = r := by simp
 
-lemma im_eq_zero_of_eq_conj {z : ℂ} : conj z = z → im z = 0 :=
-begin
-  intro h,
-  rw ext_iff at h,
-  simp at h,
-  linarith,
-end
+lemma im_eq_zero_of_eq_conj {z : ℂ} : conj z = z → im z = 0 := by simp; intros; linarith
 
 lemma eq_conj_iff_real {z : ℂ} : conj z = z ↔ ∃ r : ℝ, z = r :=
 begin
-  -- not my finest hour
   split,
   { intro h,
-    rw ext_iff at h,
-    simp at h,
-    use z.re,
-    ext,
-    { refl},
-    simp,
-    linarith},
-  { cases z with x y,
-    rintro ⟨x, hx⟩,
-    ext, refl,
-    dsimp at *,
-    rw ext_iff at hx,
-    simp * at *
-  }
-
-  
+  use re(z),
+  have h2 := im_eq_zero_of_eq_conj h,
+  simp * at *},
+  { rintro ⟨r, hr⟩,
+    simp * at *},
 end
 
 lemma eq_conj_iff_re {z : ℂ} : conj z = z ↔ (z.re : ℂ) = z :=
-sorry
+by simp; split; intros; linarith
 
 theorem add_conj (z : ℂ) : z + conj z = (2 * z.re : ℝ) :=
-sorry
-
+by  simp [bit0]; intros; linarith
 
 /-! ## Properties of the `conj` map -/
 
 @[simp] lemma conj_conj (z : ℂ) : conj (conj z) = z :=
-sorry
+by simp
 
 lemma conj_inj {z w : ℂ} : conj z = conj w ↔ z = w :=
-sorry
+by simp
 
 @[simp] lemma conj_eq_zero {z : ℂ} : conj z = 0 ↔ z = 0 :=
-sorry
+by simp
 
 /-
 
@@ -126,8 +108,8 @@ def Conj : ℂ →+* ℂ :=
 
 open function
 
-lemma conj_involutive : involutive conj := sorry
+lemma conj_involutive : involutive conj := conj_conj
 
-lemma conj_bijective : bijective conj := sorry
+lemma conj_bijective : bijective conj := involutive.bijective conj_involutive
 
 end complex

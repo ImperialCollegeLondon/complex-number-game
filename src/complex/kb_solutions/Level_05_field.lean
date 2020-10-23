@@ -6,7 +6,7 @@ Thanks: Imperial College London, leanprover-community
 -/
 
 -- Import levels 1 to 4
-import complex.your_solutions.Level_04_norm_sq
+import complex.kb_solutions.Level_04_norm_sq
 
 /-
 If you know what "the reals don't have decidable
@@ -41,12 +41,13 @@ example : ℂ := 1⁻¹
 example : ℂ := 0⁻¹ -- we have no data about this object
 
 @[simp] lemma inv_re (z : ℂ) :
-  re(z⁻¹)=re(z)/norm_sq(z) := rfl
+  re(z⁻¹) = re(z)/norm_sq(z) := rfl
 
 @[simp] lemma inv_im (z : ℂ) :
-  im(z⁻¹)=-im(z)/norm_sq(z) := rfl
+  im(z⁻¹) = -im(z)/norm_sq(z) := rfl
 
-
+lemma zero_ne_one : (0 : ℂ) ≠ 1 :=
+by intro h; simp [ext_iff, *] at *
 
 /-- The complex numbers are a field -/
 instance : field ℂ :=
@@ -72,5 +73,10 @@ def div (z w : ℂ) : ℂ := z * w⁻¹
 -- notation
 instance : has_div ℂ := ⟨complex.div⟩
 
-end complex
+example : (1 : ℂ) / 0 = 0 :=
+begin
+  ext;
+  simp,
+end
 
+end complex
