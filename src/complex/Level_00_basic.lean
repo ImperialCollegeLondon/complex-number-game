@@ -361,14 +361,6 @@ end
 theorem ext_iff' {z w : ℂ} : z = w ↔ z.re = w.re ∧ z.im = w.im :=
 ⟨λ H, by simp [H], and.rec ext⟩
 
--- useful fact -- maybe put in a better place?
-lemma zero_ne_one : (0 : ℂ) ≠ (1 : ℂ) :=
-begin
-  intro h,
-  rw ext_iff at h,
-  simp * at *,
-end
-
 end complex
 
 /-!
