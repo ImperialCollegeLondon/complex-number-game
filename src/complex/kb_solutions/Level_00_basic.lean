@@ -5,7 +5,7 @@ Authors: Kevin Buzzard.
 Thanks: Imperial College London, leanprover-community
 -/
 
--- We will assume that the real numbers are a field.
+-- Import everything about the real numbers
 import data.real.basic
 
 /-!
@@ -98,7 +98,7 @@ example (z : ℂ) : re(z) = z.re := begin refl end
 /-! ## zero (0) -/
 
 /-- The complex number with real part 0 and imaginary part 0 -/
-def zero : ℂ := ⟨0, 0⟩
+def zero : ℂ := sorry
 
 -- Now we set up notation so that `0 : ℂ` will mean `zero`. 
 
@@ -107,70 +107,67 @@ instance : has_zero ℂ := ⟨zero⟩
 
 -- Let's prove the two basic properties, both of which are true by definition,
 -- and then tag them with the appropriate attributes.
-@[simp] lemma zero_re : re(0 : ℂ) = 0 := begin refl end
-@[simp] lemma zero_im : im(0 : ℂ) = 0 := begin refl end
+@[simp] lemma zero_re : re(0 : ℂ) = 0 := sorry
+@[simp] lemma zero_im : im(0 : ℂ) = 0 := sorry
 
 /-! ## one (1) -/
 
 -- Now let's do the same thing for 1.
 
 /-- The complex number with real part 1 and imaginary part 0 -/
-def one : ℂ := ⟨1, 0⟩
+def one : ℂ := sorry
 
 /-- Notation `1` for `one` -/
 instance : has_one ℂ := ⟨one⟩ 
 
 -- name the basic properties and tag them with `simp`
-@[simp] lemma one_re : re(1 : ℂ) = 1 := begin refl end
-@[simp] lemma one_im : im(1 : ℂ) = 0 := begin refl end
+@[simp] lemma one_re : re(1 : ℂ) = 1 := sorry
+@[simp] lemma one_im : im(1 : ℂ) = 0 := sorry
 
 /-! ## add (+) -/
 
 -- Now let's define addition
 
 /-- addition `z+w` of complex numbers -/
-def add (z w : ℂ) : ℂ := ⟨z.re + w.re, z.im + w.im⟩
+def add (z w : ℂ) : ℂ := sorry
 
 /-- Notation `+` for addition -/
 instance : has_add ℂ := ⟨add⟩
 
 -- basic properties
-@[simp] lemma add_re (z w : ℂ) : re(z + w) = re(z) + re(w) := begin refl end
-@[simp] lemma add_im (z w : ℂ) : im(z + w) = im(z) + im(w) := begin refl end
+@[simp] lemma add_re (z w : ℂ) : re(z + w) = re(z) + re(w) := sorry
+@[simp] lemma add_im (z w : ℂ) : im(z + w) = im(z) + im(w) := sorry
 
 /-! ## neg (-) -/
 
 -- negation
 
 /-- The negation `-z` of a complex number `z` -/
-def neg (z : ℂ) : ℂ := ⟨-re(z), -im(z)⟩
+def neg (z : ℂ) : ℂ := sorry
 
 /-- Notation `-` for negation -/
 instance : has_neg ℂ := ⟨neg⟩
 
 -- how neg interacts with re and im
-@[simp] lemma neg_re (z : ℂ) : re(-z) = -re(z) := begin refl end
-@[simp] lemma neg_im (z : ℂ) : im(-z) = -im(z) := begin refl end
+@[simp] lemma neg_re (z : ℂ) : re(-z) = -re(z) := sorry
+@[simp] lemma neg_im (z : ℂ) : im(-z) = -im(z) := sorry
 
 /-! ## mul (*) -/
 
 -- multiplication
 
 /-- Multiplication `z*w` of two complex numbers -/
-def mul (z w : ℂ) : ℂ :=
-  ⟨re(z) * re(w) - im(z) * im(w), re(z) * im(w) + im(z) * re(w)⟩
+def mul (z w : ℂ) : ℂ := sorry
 
 /-- Notation `*` for multiplication -/
 instance : has_mul ℂ := ⟨mul⟩
 
 -- how `mul` reacts with `re` and `im`
 @[simp] lemma mul_re (z w : ℂ) : re(z * w) = re(z) * re(w) - im(z) * im(w) :=
-begin
-  refl
-end
+sorry
 
 @[simp] lemma mul_im (z w : ℂ) : im(z * w) = re(z) * im(w) + im(z) * re(w) :=
-rfl
+sorry
 
 /-! ## Example of what `simp` can now do
 
@@ -199,9 +196,7 @@ theorem `ext` :-)
 @[ext] theorem ext {z w : ℂ}
   (hre : re(z) = re(w)) (him : im(z) = im(w)) : z = w :=
 begin
-  cases z with zr zi,
-  cases w with ww wi,
-  simp * at *,
+  sorry
 end
 
 /-! # Theorem:  The complex numbers are a commutative ring
@@ -219,21 +214,18 @@ begin
   -- first the data
   refine_struct {
       zero := (0 : ℂ), add := (+), neg := has_neg.neg, one := 1, mul := (*),
-  ..};
-  -- now the axioms
-  -- of which there seem to be 11
-  -- Note the semicolons, which mean "apply next tactic to all goals".
-
-  -- First introduce the variables
-  intros;
-  -- we now have to prove an equality between two complex numbers.
-  -- It suffices to check on real and imaginary parts
-  ext;
-  -- the simplifier can simplify stuff like re(a+0)
-  simp;
-  -- all the goals now are identities between *real* numbers,
-  -- and the reals are already known to be a ring
-  ring,
+  ..},
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
+  sorry,
 end
 
 
