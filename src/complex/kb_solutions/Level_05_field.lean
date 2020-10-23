@@ -56,7 +56,11 @@ instance : field ℂ :=
     ext;
     simp,
   end,
-  zero_ne_one := zero_ne_one, 
+  exists_pair_ne := begin
+    use 0,
+    use 1,
+    exact zero_ne_one,
+  end,
   mul_inv_cancel := begin
     intro z,
     intro hz,

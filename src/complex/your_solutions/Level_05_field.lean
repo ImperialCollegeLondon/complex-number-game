@@ -40,7 +40,7 @@ instance : has_inv ℂ := ⟨inv⟩
 instance : field ℂ :=
 { inv := has_inv.inv,
   inv_zero := begin sorry end,
-  zero_ne_one := begin sorry end, 
+  exists_pair_ne := begin sorry end, 
   mul_inv_cancel := begin sorry end,
   ..complex.comm_ring }
 
