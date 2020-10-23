@@ -79,8 +79,7 @@ namespace realtac
 
 lemma norm_nonneg (x y : ℝ) : 0 ≤ x * x + y * y :=
 begin
-  apply add_nonneg;
-  apply mul_self_nonneg,
+  nlinarith,
 end
 
 lemma norm_eq_zero_iff {x y : ℝ} : x * x + y * y = 0 ↔ x = 0 ∧ y = 0 :=
