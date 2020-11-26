@@ -1,4 +1,4 @@
-All the levels are in the `src` directory. Open them with VS Code.
+Open the project in VS Code. All the levels are in the `src` directory.
 
 # The tutorial level
 
