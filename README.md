@@ -4,7 +4,7 @@ The Complex Number Game. Make an interface for the complex numbers in Lean.
 
 # Installation
 
-This assumes you have [installed Lean and the python package `mathlibtools`](https://leanprover-community.github.io/get_started.html).
+This assumes you have [installed Lean using the instructions at the leanprover-community website](https://leanprover-community.github.io/get_started.html).
 
 All you have to do is type
 
@@ -12,7 +12,7 @@ All you have to do is type
 leanproject get ImperialCollegeLondon/complex-number-game
 ```
 
-into the terminal you used to install `mathlibtools`. This will get the fully compiled Lean project onto your computer.
+into the terminal you used when installing Lean. This will get the fully compiled Lean project onto your computer.
 
 You can open the project using the terminal with
 
