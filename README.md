@@ -2,6 +2,10 @@
 
 The Complex Number Game. Make an interface for the complex numbers in Lean.
 
+# Online play
+
+Whilst installing Lean and this project locally is the recommended way to play the game, if you have an account at Github you can play online with Gitpod (wait a minute or two for everything to download and set up) here: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ImperialCollegeLondon/complex-number-game). When everything's finished downloading, open up the `src` directory on the left and then choose a level to play. Start with `Level_00_basic.lean` (a walkthrough of a proof that the complex numbers are a ring) and then move on to `Level_01_of_real.lean` (the definition of the map from the reals to the complexes). See the [instructions](INSTRUCTIONS.md) for more information.
+
 # Installation
 
 This assumes you have [installed Lean using the instructions at the leanprover-community website](https://leanprover-community.github.io/get_started.html).
