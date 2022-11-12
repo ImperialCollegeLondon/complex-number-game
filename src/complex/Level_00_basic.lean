@@ -207,37 +207,164 @@ begin
   simp * at *,
 end
 
-/-! # Theorem:  The complex numbers are a commutative ring
-
-Proof: we've defined all the structure, and every axiom can be checked by
-reducing it to checking real and imaginary parts with `ext`, expanding
-everything out with `simp`, and then using the fact that the real numbers are
-a commutative ring (which we already know)
-
+/-!
+## ext_iff
 -/
+
+/-
+Note that `ext` is an implication -- if re(z)=re(w) and im(z)=im(w) then z=w.
+The below variant `ext_iff` is the two-way implication: two complex
+numbers are equal if and only if they have the same real and imaginary part.
+Let's first see a tactic mode proof. See how the `ext` tactic is used?
+After it is applied, we have two goals, both of which are hypotheses.
+The semicolon means "apply the next tactic to all the goals
+produced by this one"
+-/
+
+theorem ext_iff {z w : ℂ} : z = w ↔ z.re = w.re ∧ z.im = w.im :=
+begin
+  split,
+  { intro H,
+    simp [H]},
+  {
+    rintro ⟨hre, him⟩,
+    ext; assumption,
+  }
+end
+
+
+
+/-! # Defining the map between `int` and `complex`
+    This is required as part of the `comm_ring` definition.
+-/
+
+
+/-- The canonical map from ℕ to ℂ. -/
+def of_nat (n : ℕ) : ℂ := ⟨n,0⟩
+
+/-- Register the conversion from ℕ to ℂ. -/
+instance nat_to_complex: has_coe ℕ ℂ := ⟨of_nat⟩
+
+/-- Proofs for how the map works for each of the `re` and `im` parts -/
+@[simp, norm_cast] lemma of_nat_re (n : ℕ) : (n : ℂ).re = n := rfl
+@[simp, norm_cast] lemma of_nat_im (n : ℕ) : (n : ℂ).im = 0 := rfl
+
+/-- Proof that the function between ℕ and ℂ is an injection-/
+@[simp, norm_cast] theorem of_nat_inj {r s : ℕ} : (r : ℂ) = s ↔ r = s :=
+begin
+  split,
+  {
+    intro h,
+    simp [ext_iff] at h,
+    exact h,
+  },
+  {
+    intro h,
+    rw [h],
+  }
+end
+
+/-- Base case for the inductive proof that the map is complete-/
+@[simp, norm_cast] lemma of_nat_zero : ((0 : ℕ) : ℂ) = 0 :=
+begin
+  ext; simp,
+end
+
+/-- Succ case for the inductive proof-/
+lemma of_nat_succ (n: ℕ) : ((nat.succ n) : ℂ) = n + 1 :=
+begin
+  ext; simp,
+end
+
+
+
+/-! # Theorem:  The complex numbers are a commutative ring
+-/
+
+/-
+Now that we have these powerful scissors in `ext` and `ext_iff`, we use them
+to prove the basic properties of `comm_ring`
+-/
+
+theorem zero_add (z: ℂ): 0 + z = z :=
+begin
+  simp [ext_iff],
+end
+
+theorem add_zero (z: ℂ): z + 0 = z :=
+begin
+  simp [ext_iff],
+end
+
+theorem add_comm (a b: ℂ): a + b = b + a :=
+begin
+  simp [ext_iff]; split; rw [add_comm],
+end
+
+theorem add_assoc (a b c: ℂ): a + b + c = a + (b + c) :=
+begin
+  simp [ext_iff]; split; rw [add_assoc],
+end
+
+theorem add_left_neg (z: ℂ): -z + z = 0 :=
+begin
+  simp [ext_iff],
+end
+
+theorem mul_one (z: ℂ): z * 1 = z :=
+begin
+  simp [ext_iff],
+end
+
+theorem one_mul (z: ℂ): 1 * z = z :=
+begin
+  simp [ext_iff],
+end
+
+theorem mul_comm (a b: ℂ): a * b = b * a :=
+begin
+  simp [ext_iff],split; rw [mul_comm b.re, mul_comm b.im], rw field.add_comm (a.re * b.im),
+end
+
+theorem mul_assoc (a b c: ℂ): a * b * c = a * (b * c) :=
+begin
+  simp [ext_iff]; split; ring,
+end
+
+theorem left_distrib (a b c: ℂ): a * (b + c) = a * b + a * c :=
+begin
+  simp [ext_iff]; split; ring,
+end
+
+theorem right_distrib (a b c: ℂ): (a + b) * c = a * c + b * c :=
+begin
+  simp [ext_iff]; split; ring,
+end
 
 /-- The complex numbers are a commutative ring -/
 instance : comm_ring ℂ :=
-begin
-  -- first the data
-  refine_struct {
-      zero := (0 : ℂ), add := (+), neg := has_neg.neg, one := 1, mul := (*),
-  ..};
-  -- now the axioms
-  -- of which there seem to be 11
-  -- Note the semicolons, which mean "apply next tactic to all goals".
+{
+  zero             := (0 : ℂ),
+  add              := (+),
+  neg              := has_neg.neg,
+  one              := 1,
+  mul              := (*),
+  zero_add         := complex.zero_add,
+  add_zero         := complex.add_zero,
+  add_comm         := complex.add_comm,
+  add_assoc        := complex.add_assoc,
+  add_left_neg     := complex.add_left_neg,
+  mul_one          := complex.mul_one,
+  one_mul          := complex.one_mul,
+  mul_comm         := complex.mul_comm,
+  mul_assoc        := complex.mul_assoc,
+  left_distrib     := complex.left_distrib,
+  right_distrib    := complex.right_distrib,
+  nat_cast         := of_nat,
+  nat_cast_zero    := of_nat_zero,
+  nat_cast_succ    := of_nat_succ,
+}
 
-  -- First introduce the variables
-  intros;
-  -- we now have to prove an equality between two complex numbers.
-  -- It suffices to check on real and imaginary parts
-  ext;
-  -- the simplifier can simplify stuff like re(a+0)
-  simp;
-  -- all the goals now are identities between *real* numbers,
-  -- and the reals are already known to be a ring
-  ring,
-end
 
 
 /-
@@ -330,32 +457,8 @@ were definitionally equal.
 theorem eta' : ∀ z : ℂ, complex.mk z.re z.im = z
 | ⟨x, y⟩ := rfl
 
-/-!
-## ext_iff
--/
 
-/-
-Note that `ext` is an implication -- if re(z)=re(w) and im(z)=im(w) then z=w.
-The below variant `ext_iff` is the two-way implication: two complex
-numbers are equal if and only if they have the same real and imaginary part.
-Let's first see a tactic mode proof. See how the `ext` tactic is used?
-After it is applied, we have two goals, both of which are hypotheses.
-The semicolon means "apply the next tactic to all the goals
-produced by this one"
--/
-
-theorem ext_iff {z w : ℂ} : z = w ↔ z.re = w.re ∧ z.im = w.im :=
-begin
-  split,
-  { intro H,
-    simp [H]},
-  {
-    rintro ⟨hre, him⟩,
-    ext; assumption,
-  }
-end
-
--- Again this is easy to write in term mode, and no mathematician
+-- Again `ext_iff` is easy to write in term mode, and no mathematician
 -- wants to read the proof anyway.
 
 theorem ext_iff' {z w : ℂ} : z = w ↔ z.re = w.re ∧ z.im = w.im :=
